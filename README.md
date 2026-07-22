@@ -9,15 +9,15 @@ API externa para consultar razas de perro.
 https://github.com/port4folio/06-repositorio-vacio-ejemplo-react-Eduus123
 ## Descripción del proyecto
 ### 1. CRUD de mascotas (localStorage)
-- Formulario con 5 campos: **nombre**, **especie**, **dueño/a**, **edad** y
+- Formulario con 6 campos: **nombre**, **especie**, **raza**, **dueño/a**, **edad** y
   **observaciones**
 - Validación de datos antes de guardar (longitudes, rangos, campos obligatorios).
 - Tabla dinámica con funciones de **editar** y **eliminar**.
 - Persistencia automática en `localStorage`, con manejo de errores por si los
   datos guardados están corruptos o el storage no está disponible.
 - Separado en 3 componentes:
-  - `PetForm`: formulario de alta/edición.
-  - `PetTable`: tabla contenedora.
+  - `PetForm`: formulario de edición.
+  - `PetTable`: tabla.
   - `PetRow`: fila individual (recibe datos y callbacks vía props).
 ### 2. Consumo de API externa
 - Componente `BreedGallery`, que consume la API pública **[Dog CEO](https://dog.ceo/api)**
