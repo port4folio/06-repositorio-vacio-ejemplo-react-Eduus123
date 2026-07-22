@@ -13,13 +13,11 @@ function App() {
 
   function handleSave(petData) {
     if (editingPet) {
-      // Actualizar registro existente
       setPets((prev) =>
         prev.map((p) => (p.id === editingPet.id ? { ...petData, id: editingPet.id } : p))
       );
       setEditingPet(null);
     } else {
-      // Crear nuevo registro con id único
       const newPet = { ...petData, id: crypto.randomUUID() };
       setPets((prev) => [...prev, newPet]);
     }
