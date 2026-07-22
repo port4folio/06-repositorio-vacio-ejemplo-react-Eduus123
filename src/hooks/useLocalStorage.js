@@ -6,7 +6,6 @@ export function useLocalStorage(key, initialValue) {
       const stored = window.localStorage.getItem(key);
       if (!stored) return initialValue;
       const parsed = JSON.parse(stored);
-      // Validación de integridad: nos aseguramos de que sea el tipo esperado (array)
       if (!Array.isArray(parsed)) {
         console.warn(`Datos corruptos en localStorage para "${key}", se restauran valores por defecto.`);
         return initialValue;

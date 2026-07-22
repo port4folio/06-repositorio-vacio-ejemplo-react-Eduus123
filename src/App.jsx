@@ -42,12 +42,9 @@ function App() {
     setEditingPet(null);
   }
 
-  // Integración funcional: al elegir una raza en la galería (API externa),
-  // la guardamos y la mandamos al formulario para que se autocomplete.
   function handleUseBreed(breed) {
-    setEditingPet(null); // por si había una edición en curso, empezamos limpio
-    setSuggestedBreed({ value: breed, ts: Date.now() }); // ts fuerza a que el efecto reaccione aunque se repita la raza
-    setActiveTab("registro");
+    setEditingPet(null);
+    setSuggestedBreed({ value: breed, ts: Date.now() }); 
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
