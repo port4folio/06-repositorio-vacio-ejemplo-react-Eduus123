@@ -4,25 +4,43 @@ import { validatePet } from "../utils/validation";
 const EMPTY_FORM = {
   nombre: "",
   especie: "",
+  raza: "",
+  razaOtra: "",
   dueño: "",
   edad: "",
   observaciones: "",
 };
 
+const RAZAS_COMUNES = [
+  "Labrador",
+  "Golden Retriever",
+  "Bulldog Francés",
+  "Chihuahua",
+  "Pastor Alemán",
+  "Poodle",
+  "Criollo / Mestizo",
+  "Persa",
+  "Siamés",
+  "Otra (especificar)",
+];
+
 /**
  * Formulario controlado para crear o editar una mascota.
  * Recibe `editingPet` (o null) y notifica al padre vía callback `onSave`.
  */
-function PetForm({ editingPet, onSave, onCancelEdit }) {
+function PetForm({ editingPet, onSave, onCancelEdit, suggestedBreed }) {
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
 
   // Cuando el padre selecciona una mascota para editar, precargamos el form
   useEffect(() => {
     if (editingPet) {
+      const razaConocida = RAZAS_COMUNES.includes(editingPet.raza);
       setForm({
         nombre: editingPet.nombre,
         especie: editingPet.especie,
+        raza: razaConocida ? editingPet.raza : "Otra (especificar)",
+        razaOtra: razaConocida ? "" : editingPet.raza || "",
         dueño: editingPet.dueño,
         edad: editingPet.edad,
         observaciones: editingPet.observaciones || "",
@@ -30,6 +48,28 @@ function PetForm({ editingPet, onSave, onCancelEdit }) {
       setErrors({});
     }
   }, [editingPet]);
+
+  // Cuando el usuario elige "Usar en el formulario" desde la galería de razas
+  // (API externa), autocompletamos el campo raza automáticamente.
+  useEffect(() => {
+    if (!suggestedBreed?.value) return;
+
+    const breedLabel = suggestedBreed.value
+      .split("/")
+      .reverse()
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(" ");
+
+    const coincide = RAZAS_COMUNES.find(
+      (r) => r.toLowerCase() === breedLabel.toLowerCase()
+    );
+
+    setForm((prev) => ({
+      ...prev,
+      raza: coincide ?? "Otra (especificar)",
+      razaOtra: coincide ? "" : breedLabel,
+    }));
+  }, [suggestedBreed]);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -39,7 +79,12 @@ function PetForm({ editingPet, onSave, onCancelEdit }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const { isValid, errors: validationErrors, sanitized } = validatePet(form);
+    const razaFinal = form.raza === "Otra (especificar)" ? form.razaOtra.trim() : form.raza;
+
+    const { isValid, errors: validationErrors, sanitized } = validatePet({
+      ...form,
+      raza: razaFinal,
+    });
 
     if (!isValid) {
       setErrors(validationErrors);
@@ -108,6 +153,43 @@ function PetForm({ editingPet, onSave, onCancelEdit }) {
                 />
                 {errors.especie && <div className="invalid-feedback">{errors.especie}</div>}
               </div>
+            </div>
+
+            <div className="col-md-6">
+              <label htmlFor="raza" className="form-label">
+                Raza
+              </label>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="bi bi-award"></i>
+                </span>
+                <select
+                  className="form-select"
+                  id="raza"
+                  name="raza"
+                  value={form.raza}
+                  onChange={handleChange}
+                >
+                  <option value="">-- Selecciona una raza --</option>
+                  {RAZAS_COMUNES.map((r) => (
+                    <option key={r} value={r}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {form.raza === "Otra (especificar)" && (
+                <input
+                  type="text"
+                  className={`form-control mt-2 ${errors.raza ? "is-invalid" : ""}`}
+                  name="razaOtra"
+                  value={form.razaOtra}
+                  onChange={handleChange}
+                  placeholder="Escribe la raza de la mascota"
+                  maxLength={40}
+                />
+              )}
+              {errors.raza && <div className="text-danger small mt-1">{errors.raza}</div>}
             </div>
 
             <div className="col-md-6">

@@ -9,6 +9,7 @@ function App() {
   const [pets, setPets] = useLocalStorage("vet-pets", []);
   const [editingPet, setEditingPet] = useState(null);
   const [activeTab, setActiveTab] = useState("registro");
+  const [suggestedBreed, setSuggestedBreed] = useState(null);
 
   function handleSave(petData) {
     if (editingPet) {
@@ -42,9 +43,10 @@ function App() {
   }
 
   // Integración funcional: al elegir una raza en la galería (API externa),
-  // volvemos a la pestaña de registro para usarla como referencia.
+  // la guardamos y la mandamos al formulario para que se autocomplete.
   function handleUseBreed(breed) {
-    window.alert(`Raza "${breed}" seleccionada. Puedes usarla como referencia en el campo "Especie".`);
+    setEditingPet(null); // por si había una edición en curso, empezamos limpio
+    setSuggestedBreed({ value: breed, ts: Date.now() }); // ts fuerza a que el efecto reaccione aunque se repita la raza
     setActiveTab("registro");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -87,7 +89,12 @@ function App() {
 
         {activeTab === "registro" && (
           <>
-            <PetForm editingPet={editingPet} onSave={handleSave} onCancelEdit={handleCancelEdit} />
+            <PetForm
+              editingPet={editingPet}
+              onSave={handleSave}
+              onCancelEdit={handleCancelEdit}
+              suggestedBreed={suggestedBreed}
+            />
             <div className="card shadow-sm">
               <div className="card-body">
                 <h2 className="h5 card-title mb-3 d-flex align-items-center gap-2">

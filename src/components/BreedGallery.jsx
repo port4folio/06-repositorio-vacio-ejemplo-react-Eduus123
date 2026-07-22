@@ -2,12 +2,6 @@ import { useState, useEffect, useCallback } from "react";
 
 const API_BASE = "https://dog.ceo/api";
 
-/**
- * Tercer componente: consume la API externa "Dog CEO" (https://dog.ceo/api)
- * usando fetch. Se integra al SPA como una pestaña adicional dentro de la
- * misma aplicación (ver App.jsx), permitiendo al usuario buscar razas de
- * perro para usarlas de referencia al registrar una mascota.
- */
 function BreedGallery({ onUseBreed }) {
   const [breeds, setBreeds] = useState([]);
   const [selectedBreed, setSelectedBreed] = useState("");
@@ -16,7 +10,6 @@ function BreedGallery({ onUseBreed }) {
   const [loadingImages, setLoadingImages] = useState(false);
   const [error, setError] = useState(null);
 
-  // Cargar la lista de razas disponibles al montar el componente
   useEffect(() => {
     let cancelled = false;
 

@@ -1,10 +1,5 @@
 import PetRow from "./PetRow";
 
-/**
- * Componente de tabla: recibe la lista de mascotas y renderiza
- * un PetRow por cada una. No maneja estado propio; delega
- * las acciones de editar/eliminar hacia arriba mediante props.
- */
 function PetTable({ pets, onEdit, onDelete }) {
   if (pets.length === 0) {
     return (
@@ -22,6 +17,7 @@ function PetTable({ pets, onEdit, onDelete }) {
           <tr>
             <th>Nombre</th>
             <th>Especie</th>
+            <th>Raza</th>
             <th>Dueño/a</th>
             <th className="text-center">Edad</th>
             <th>Observaciones</th>

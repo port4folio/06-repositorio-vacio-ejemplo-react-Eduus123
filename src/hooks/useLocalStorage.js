@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
 
-/**
- * Hook para sincronizar un estado con localStorage.
- * Incluye manejo de errores para no romper la app si localStorage
- * no está disponible o los datos guardados están corruptos.
- */
 export function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
     try {

@@ -1,8 +1,3 @@
-/**
- * Componente de fila: representa una mascota dentro de la tabla.
- * Recibe la mascota y callbacks (props) para editar/eliminar,
- * sin conocer cómo el padre implementa esas acciones.
- */
 function PetRow({ pet, onEdit, onDelete }) {
   return (
     <tr>
@@ -10,6 +5,7 @@ function PetRow({ pet, onEdit, onDelete }) {
       <td>
         <span className="badge text-bg-light border">{pet.especie}</span>
       </td>
+      <td className="text-muted">{pet.raza}</td>
       <td>{pet.dueño}</td>
       <td className="text-center">{pet.edad}</td>
       <td className="text-muted small">{pet.observaciones || "—"}</td>

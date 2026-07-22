@@ -1,13 +1,9 @@
-/**
- * Validaciones simples del formulario de mascotas.
- * Sanitizamos strings con trim() y validamos tipos/rangos antes de
- * guardar en localStorage, para no persistir datos vacíos o inválidos.
- */
 export function validatePet(pet) {
   const errors = {};
 
   const nombre = pet.nombre?.trim() ?? "";
   const especie = pet.especie?.trim() ?? "";
+  const raza = pet.raza?.trim() ?? "";
   const dueño = pet.dueño?.trim() ?? "";
   const edad = pet.edad;
 
@@ -19,6 +15,10 @@ export function validatePet(pet) {
 
   if (especie.length < 2) {
     errors.especie = "Indica la especie (ej: perro, gato, ave).";
+  }
+
+  if (raza.length < 2) {
+    errors.raza = "Indica la raza o escribe una si no aparece en la lista.";
   }
 
   if (dueño.length < 2) {
@@ -39,13 +39,14 @@ export function validatePet(pet) {
       ...pet,
       nombre,
       especie,
+      raza,
       dueño,
       edad: edadNum,
     },
   };
 }
 
-/** Escapa texto simple para evitar inyección al mostrarlo (defensa extra). */
+
 export function sanitizeText(text) {
   return String(text)
     .replace(/</g, "&lt;")
