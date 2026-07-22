@@ -1,4 +1,4 @@
-# 🐾 Veterinaria Huellitas — SPA React (Evaluación Unidad 3)
+# 🐾 Veterinaria Huellitas 
 
 Aplicación web de una sola página (SPA) desarrollada en **React + Vite**, que
 permite gestionar el registro de mascotas de una veterinaria mediante
@@ -6,8 +6,7 @@ operaciones CRUD persistidas en `localStorage`, e integra el consumo de una
 API externa para consultar razas de perro.
 
 ## Integrantes
-- Nombre Apellido 1 — reemplazar
-- Nombre Apellido 2 — reemplazar
+- Eduardo Lepileo
 
 ## Repositorio
 https://github.com/port4folio/06-repositorio-vacio-ejemplo-react-Eduus123
@@ -16,7 +15,7 @@ https://github.com/port4folio/06-repositorio-vacio-ejemplo-react-Eduus123
 
 ### 1. CRUD de mascotas (localStorage)
 - Formulario con 5 campos: **nombre**, **especie**, **dueño/a**, **edad** y
-  **observaciones** (opcional).
+  **observaciones**
 - Validación de datos antes de guardar (longitudes, rangos, campos obligatorios).
 - Tabla dinámica con funciones de **editar** y **eliminar**.
 - Persistencia automática en `localStorage`, con manejo de errores por si los
