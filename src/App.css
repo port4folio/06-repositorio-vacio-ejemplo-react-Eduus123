@@ -1,0 +1,97 @@
+/*
+  Paleta "Veterinaria Huellitas": verde salvia + terracota suave,
+  evocando consultorio + calidez animal, evitando el típico
+  crema/terracota genérico de IA usando tonos más verdes/tierra
+  y un header sólido en lugar de gradiente.
+*/
+:root {
+  --sage-900: #26362c;
+  --sage-700: #3d5745;
+  --sage-500: #5c7d67;
+  --clay-500: #c17a52;
+  --cream: #f7f5f2;
+  --ink: #1f2420;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", system-ui, Roboto, sans-serif;
+  color: var(--ink);
+}
+
+.app-header {
+  background: var(--sage-900);
+  color: #fff;
+}
+
+.app-header h1 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.app-header i.bi-heart-pulse-fill {
+  color: var(--clay-500);
+}
+
+main {
+  flex: 1;
+}
+
+.nav-pills .nav-link {
+  color: var(--sage-900);
+  background-color: #fff;
+  border: 1px solid #e2ddd4;
+  font-weight: 500;
+}
+
+.nav-pills .nav-link.active {
+  background-color: var(--sage-700);
+  border-color: var(--sage-700);
+  color: #fff;
+}
+
+.card {
+  border: 1px solid #e2ddd4;
+  border-radius: 0.75rem;
+}
+
+.card-title i {
+  color: var(--sage-500);
+}
+
+.btn-primary {
+  background-color: var(--sage-700);
+  border-color: var(--sage-700);
+}
+
+.btn-primary:hover {
+  background-color: var(--sage-900);
+  border-color: var(--sage-900);
+}
+
+.btn-outline-primary {
+  color: var(--sage-700);
+  border-color: var(--sage-700);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--sage-700);
+  border-color: var(--sage-700);
+}
+
+.table thead {
+  background-color: var(--cream);
+}
+
+.badge.text-bg-light {
+  background-color: #eef1ec !important;
+  color: var(--sage-900);
+}
+
+footer {
+  background-color: #fff;
+  border-top: 1px solid #e2ddd4;
+}
